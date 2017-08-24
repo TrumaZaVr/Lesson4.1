@@ -1,6 +1,8 @@
 <?php
 $pdo = new PDO("mysql:host=localhost;dbname=tet;charset=utf8", "root");
-$sql = "SELECT * FROM books";   
+$sql = "SELECT * FROM books";  
+$statement = $pdo->prepare($sql);
+$statement->execute();
 ?>
 <!DOCTYPE html>
 <body>
@@ -28,7 +30,7 @@ $sql = "SELECT * FROM books";
         <th>Жанр</th>
         <th>ISBN</th>
     </tr>
-    <?php foreach($pdo->query($sql) as $obj) { ?>
+    <?php foreach($statement as $obj) { ?>
         <tr>
             <td><?php echo $obj["name"]; ?></td>
             <td><?php echo $obj["author"]; ?></td>
